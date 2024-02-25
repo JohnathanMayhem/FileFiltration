@@ -68,7 +68,6 @@ public class FileWriterExecutor {
 
     Statistic getStatistic() {
         while (!executor.isTerminated()) {
-            System.out.println("Not finished");
             try {
                 TimeUnit.MILLISECONDS.sleep(10000);
             } catch (InterruptedException e) {

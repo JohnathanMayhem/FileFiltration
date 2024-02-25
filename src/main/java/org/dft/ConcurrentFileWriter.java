@@ -14,8 +14,6 @@ public class ConcurrentFileWriter implements Closeable, AutoCloseable {
 
     private void createWriter() throws IOException {
         Path path = Path.of(filename);
-        System.out.println(filename);
-        System.out.println(Files.exists(path));
         if (Files.exists(path)) {
             if (aFlag) {
                 writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
@@ -24,12 +22,10 @@ public class ConcurrentFileWriter implements Closeable, AutoCloseable {
                 writer.write("");
                 writer.close();
                 writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
-                System.out.println("we come here");
             }
         } else {
             writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
             this.ctreatedFlag = true;
-            System.out.println("Flag created");
         }
     }
 
@@ -53,13 +49,11 @@ public class ConcurrentFileWriter implements Closeable, AutoCloseable {
         this.writer.write(data);
         this.writer.write("\n");
         this.writer.flush();
-        System.out.print(data);
-        System.out.println(" writed");
         if(this.ctreatedFlag) {
             Path path = Path.of(filename);
             this.writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
             this.writer.flush();
-            System.out.println("Changed");
+
         }
 
     }
